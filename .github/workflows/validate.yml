@@ -1,0 +1,41 @@
+name: Validate Skills
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-all:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate all skills
+        run: |
+          echo "=== CI Validation ==="
+          FAILED=0
+          for skill_dir in skills/*/; do
+            name=$(basename "$skill_dir")
+            if [ -f "$skill_dir/install.json" ]; then
+              echo ""
+              if bash scripts/validate.sh "$name"; then
+                echo "  ✅ $name passed"
+              else
+                echo "  ❌ $name FAILED"
+                FAILED=$((FAILED + 1))
+              fi
+            fi
+          done
+          echo ""
+          if [ "$FAILED" -gt 0 ]; then
+            echo "❌ $FAILED skill(s) failed validation"
+            exit 1
+          fi
+          echo "✅ All skills validated successfully"
+
+      - name: Test install (dry-run)
+        run: |
+          echo "=== Install Syntax Check ==="
+          bash -n scripts/install.sh && echo "✅ install.sh syntax OK" || exit 1

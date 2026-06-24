@@ -1,0 +1,38 @@
+{
+  "name": "audit-health",
+  "version": "1.0.0",
+  "description": "System health audit + anti-bloat guards with progressive disclosure enforcement",
+  "author": "lee",
+  "requires": [],
+  "files": {
+    "SKILL.md": "~/.claude/skills/audit-health/SKILL.md",
+    "README.md": "~/.claude/skills/audit-health/README.md",
+    "commands/audit-health.md": "~/.claude/commands/audit-health.md"
+  },
+  "shared": [
+    { "source": "shared/hooks/guard-skill-bloat.js", "dest": "~/.claude/hooks/guard-skill-bloat.js" },
+    { "source": "shared/hooks/guard-mcp-count.js", "dest": "~/.claude/hooks/guard-mcp-count.js" },
+    { "source": "shared/rules/progressive-disclosure.md", "dest": "~/.claude/rules/common/progressive-disclosure.md" }
+  ],
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "command": "node ~/.claude/hooks/guard-mcp-count.js",
+        "timeout": 5,
+        "description": "Guard: warn if MCP server count exceeds safe threshold"
+      },
+      {
+        "matcher": "Write",
+        "command": "node ~/.claude/hooks/guard-skill-bloat.js",
+        "timeout": 5,
+        "description": "Guard: warn/block if SKILL.md exceeds progressive disclosure thresholds"
+      }
+    ]
+  },
+  "claude_md": {
+    "append_file": "anti-bloat-claude-md.md",
+    "anchor_after": "## System Health",
+    "dedup": true
+  }
+}
