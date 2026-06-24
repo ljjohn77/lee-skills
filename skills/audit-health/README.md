@@ -5,15 +5,20 @@ Monitors Claude Code system health. Compares against 2026-06-24 post-optimizatio
 ## Quick Start
 
 ```bash
-# Install (one command)
-leeskill -a audit-health
-
-# Verify
-/audit-health
-
-# Uninstall
-leeskill -d audit-health
+git clone https://github.com/ljjohn77/lee-skills.git
+cd lee-skills
+bash scripts/install.sh audit-health
 ```
+
+After install, verify with `/audit-health`.
+
+To uninstall, run from the same directory:
+
+```bash
+bash scripts/uninstall.sh audit-health
+```
+
+> If you have [leeskill](https://github.com/ljjohn77/lee-skills) installed: `leeskill -a audit-health` / `leeskill -d audit-health`
 
 ## What It Does
 
@@ -27,10 +32,10 @@ leeskill -d audit-health
 
 ## Install
 
-### Via leeskill (recommended)
-
 ```bash
-leeskill -a audit-health
+git clone https://github.com/ljjohn77/lee-skills.git
+cd lee-skills
+bash scripts/install.sh audit-health
 ```
 
 Progress output:
@@ -44,12 +49,6 @@ Progress output:
 Done. Run /audit-health to check system health.
 ```
 
-### Manual install
-
-```bash
-git clone https://github.com/lee/lee-skills.git /tmp/lee-skills
-bash /tmp/lee-skills/scripts/install.sh audit-health
-```
 
 ## What Gets Installed
 

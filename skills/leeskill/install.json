@@ -1,0 +1,14 @@
+{
+  "name": "leeskill",
+  "version": "1.0.0",
+  "description": "Skill package manager — install, remove, list, and update skills from lee-skills repo",
+  "author": "lee",
+  "requires": [],
+  "files": {
+    "SKILL.md": "~/.claude/skills/leeskill/SKILL.md",
+    "README.md": "~/.claude/skills/leeskill/README.md"
+  },
+  "shared": [],
+  "hooks": {},
+  "claude_md": {}
+}
